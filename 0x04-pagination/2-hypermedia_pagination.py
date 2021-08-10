@@ -1,4 +1,4 @@
-#!/usr/bin/ptrhon3
+#!/usr/bin/env python3
 """Hypermedia pagination
 """
 import csv
@@ -39,11 +39,10 @@ class Server:
 
     def get_hyper(self, page: int=1, page_size: int=10) -> dict:
         """takes the same arguments and returns a dictionary"""
-
         total_pag = len(self.dataset()) / page_size
 
-        total_pages = math.ceil (total_pag)
-        
+        total_pages = math.ceil(total_pag)
+
         return {
             'page_size': page_size,
             'page': page,
@@ -51,4 +50,4 @@ class Server:
             'next_page': page + 1 if (page + 1) <= total_pages else None,
             'prev_page': page - 1 if (page - 1) > 0 else None,
             'total_pages': total_pages
-}
+        }

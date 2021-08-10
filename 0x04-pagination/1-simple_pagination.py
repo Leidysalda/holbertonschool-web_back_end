@@ -1,4 +1,4 @@
-#!/usr/bin/ptrhon3
+#!/usr/bin/env python3
 """Simple pagination
 """
 import csv

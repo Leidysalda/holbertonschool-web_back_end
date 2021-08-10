@@ -1,4 +1,4 @@
-#!/usr/bin/ptrhon3
+#!/usr/bin/env ptrhon3
 """Simple helper function
 """
 
