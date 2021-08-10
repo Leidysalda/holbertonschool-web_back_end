@@ -29,7 +29,7 @@ class Server:
             self.__dataset = dataset[1:]
         return self.__dataset
 
-    def get_page(self, page: int=1, page_size: int=10) -> List[List]:
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page"""
         for pag in [page, page_size]:
             assert isinstance(pag, int) and page > 0
@@ -37,7 +37,7 @@ class Server:
         r_pag = index_range(page=page, page_size=page_size)
         return self.__dataset[r_pag[0]:r_pag[1]]
 
-    def get_hyper(self, page: int=1, page_size: int=10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """takes the same arguments and returns a dictionary"""
         total_pag = len(self.dataset()) / page_size
 
