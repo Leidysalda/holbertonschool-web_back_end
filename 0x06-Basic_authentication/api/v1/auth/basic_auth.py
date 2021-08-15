@@ -10,14 +10,14 @@ from models.user import User
 class BasicAuth(Auth):
     """ Basic Auth
     """
-    def extract_base64_authorization_header(
-            self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """ Basic - Base64 part
         """
         if authorization_header is None or not isinstance(
                 authorization_header, str):
             return None
-        if authorization_header[:6] != 'Basic':
+        if authorization_header[:6] != 'Basic ':
             return None
         return authorization_header[6:]
 
@@ -25,12 +25,12 @@ class BasicAuth(Auth):
             self, base64_authorization_header: str) -> str:
         """ Basic - Base64 part
         """
-        if base64_Authorization_header is None:
+        if base64_authorization_header is None:
             return None
         if not isinstance(base64_authorization_header, str):
             return None
         try:
-            base = base64_Authorization_header.encode('utf-8')
+            base = base64_authorization_header.encode('utf-8')
             decoded = b64decode(base)
             info = decoded.decode('utf-8')
             return info
@@ -59,7 +59,7 @@ class BasicAuth(Auth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
         try:
-            list_search = User.search({'email': user_mail})
+            list_search = User.search({'email': user_email})
             for item in list_search:
                 if item.is_valid_password(user_pwd):
                     return item
@@ -72,6 +72,6 @@ class BasicAuth(Auth):
             """
             auth = self.authorization_header(request)
             code = self.extract_base64_authorization_header(auth)
-            decode = self.decode_base64_authorization_header(code)
+            decoded = self.decode_base64_authorization_header(code)
             mail, password = self.extract_user_credentials(decoded)
             return self.user_object_from_credentials(mail, password)
