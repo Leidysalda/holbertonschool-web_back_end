@@ -33,14 +33,14 @@ def not_found(error) -> str:
 
 
 @app.errorhandler(401)
-def not_authorized(error) -> str:
+def resource_not_found(e):
     """Unauthorized handler
     """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
-def e_forbidden(error) -> str:
+def forbidden_app(e):
     """ forbidden handler
     """
     return jsonify({"error": "Forbidden"}), 403
@@ -51,11 +51,9 @@ def before_request():
     """ Before request
     """
     if auth is not None:
-        pathList = [
-            '/api/v1/status/',
-            '/api/v1/unauthorized/',
-            '/api/v1/forbidden/'
-        ]
+        pathList = ['/api/v1/status/',
+                    '/api/v1/unauthorized/',
+                    '/api/v1/forbidden/']
         if auth.require_auth(request.path, pathList) is False:
             return
         if auth.authorization_header(request) is None:

@@ -14,8 +14,8 @@ class BasicAuth(Auth):
                                             authorization_header: str) -> str:
         """ Basic - Base64 part
         """
-        if authorization_header is None or not isinstance(
-                authorization_header, str):
+        if authorization_header is None or \
+                not isinstance(authorization_header, str):
             return None
         if authorization_header[:6] != 'Basic ':
             return None
@@ -63,15 +63,15 @@ class BasicAuth(Auth):
             for item in list_search:
                 if item.is_valid_password(user_pwd):
                     return item
-                return None
+            return None
         except Exception:
             return None
 
-        def current_user(self, request=None) -> TypeVar('User'):
-            """ Basic - Overload current_user - and BOOM!
-            """
-            auth = self.authorization_header(request)
-            code = self.extract_base64_authorization_header(auth)
-            decoded = self.decode_base64_authorization_header(code)
-            mail, password = self.extract_user_credentials(decoded)
-            return self.user_object_from_credentials(mail, password)
+    def current_user(self, request=None) -> TypeVar('User'):
+        """ Basic - Overload current_user - and BOOM!
+        """
+        auth = self.authorization_header(request)
+        code = self.extract_base64_authorization_header(auth)
+        decoded = self.decode_base64_authorization_header(code)
+        mail, password = self.extract_user_credentials(decoded)
+        return self.user_object_from_credentials(mail, password)
