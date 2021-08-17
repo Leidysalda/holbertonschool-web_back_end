@@ -45,13 +45,13 @@ def filter_datum(fields: List[str],
 def get_logger() -> logging.Logger:
     """ Get logger
     """
-    log = logging.getLoger("user_data")
-    log.setLevel(loggin.INFO)
-    log.propagate = False
+    logger = logging.getLoger("user_data")
+    logger.setLevel(loggin.INFO)
+    logger.propagate = False
     sh = logging.StreamHandler()
     sh.setFormatter(RedactingFormatter(PII_FIELDS))
-    log.addHandler(sh)
-    return log
+    logger.addHandler(sh)
+    return logger
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
@@ -76,13 +76,13 @@ def main() -> None:
     cursor.execute("SELECT * FROM users;")
     num_fields = len(cursor.description)
     fields_names = [i[0] for i in cursor.description]
-    log = get_logger()
+    logger = get_logger()
 
     for row in cursor:
         message = ''
         for item in range(num_fields):
             message += fields_name[item] + '=' + str(row[item]) + ';'
-        log.info(message)
+        logger.info(message)
     cursor.close()
     db.close()
 
