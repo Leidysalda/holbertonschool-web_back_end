@@ -13,7 +13,7 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
-        """
+    """
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
@@ -26,19 +26,21 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        """ Format 
+        """ Format
         """
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+def filter_datum(fields: List[str],
+                 redaction: str, message: str, separator: str) -> str:
     """ Regex-ing
     """
     for field in fields:
         message = re.sub(field + '=.*?' + separator, field + '=' +
                          redaction + separator, message)
     return message
+
 
 def get_logger() -> logging.Logger:
     """ Get logger
@@ -50,6 +52,7 @@ def get_logger() -> logging.Logger:
     sh.setFormatter(RedactingFormatter(PII_FIELDS))
     log.addHandler(sh)
     return log
+
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """ Database SQL
@@ -63,6 +66,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                                                       password=password_db,
                                                       host=host_db,
                                                       database=name_db)
+
 
 def main() -> None:
     """ Main
@@ -81,7 +85,7 @@ def main() -> None:
         log.info(message)
     cursor.close()
     db.close()
-    
+
 
 if __name__ == "__main__":
     main()
