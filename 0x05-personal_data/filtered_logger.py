@@ -5,6 +5,7 @@ from typing import List
 import logging
 import re
 from os import getenv
+import mysql.connector
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
@@ -68,7 +69,7 @@ def main() -> None:
     """
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM users")
+    cursor.execute("SELECT * FROM users;")
     num_fields = len(cursor.description)
     fields_names = [i[0] for i in cursor.description]
     log = get_logger()
