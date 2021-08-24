@@ -32,28 +32,28 @@ class TestAccessNestedMap(unittest.TestCase):
 class TestGetJson(unittest.TestCase):
     """ TestGetJson
     """
-    
     @parameterized.expand([("http://example.com", {"payload": True}),
                            ("http://holberton.io", {"payload": False})])
     @patch('test_utils.get_json')
-    def test_get_json(self, test_url: str, test_payload: dict, mock_get: Any) -> Any:
+    def test_get_json(self, test_url: str, test_payload: dict,
+                      mock_get: Any) -> Any:
         """ method to test
         """
         mock_get.return_value = test_payload
         data = get_json(test_url)
         self.assertEqual(data, test_payload)
-    
-        
+
+
 class TestMemoize(unittest.TestCase):
     """ Parameterize and patch
     """
     def test_memoize(self):
         """ Method memoize
         """
-        
+
         class TestClass:
             """ Test class
-            """    
+            """
             def a_method(self):
                 """ a method
                 """
