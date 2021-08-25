@@ -4,7 +4,7 @@
 import unittest
 from typing import Any, Sequence, Mapping
 from utils import access_nested_map, get_json, memoize
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, PropertyMock
 from client import GithubOrgClient
 
@@ -54,26 +54,10 @@ class TestGithubOrgClient(unittest.TestCase):
                             "my_license", True),
                            ({"license": {"key": "other_license"}},
                             "my_license", False)])
-    def test_has_license(self, key: dict, licence_key: str,
+    def test_has_license(self, key: dict, license_key: str,
                          result: bool) -> Any:
         """ Test Hash license
         """
         test = GithubOrgClient('google')
         test_license = test.has_license(key, license_key)
         self.assertEqual(test_license, result)
-
-
-
-@paramerized_class(("org_payload", "repos_payload", "expected_repos",
-                    "apache2_repos"))
-class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """ Class
-    """
-    def setUpClass(self):
-        """ set up
-        """
-
-
-    def tearDownClass(self):
-        """ tear
-        """
