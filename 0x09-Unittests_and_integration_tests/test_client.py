@@ -50,14 +50,14 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_req.assert_called_once()
             mock_get.assert_called_once()
 
-        @parameterized.expand([({"license": {"key": "my_license"}},
-                                "my_license", True),
-                               ({"license": {"key": "other_license"}},
-                                "my_license", False)])
-        def test_has_license(self, key: dict, licence_key: str,
-                             result: bool) -> Any:
-            """ Test Hash license
-            """
-            test = GithubOrgClient('google')
-            test_license = test.has_license(key, license_key)
-            self.assertEqual(test_license, result)
+    @parameterized.expand([({"license": {"key": "my_license"}},
+                            "my_license", True),
+                           ({"license": {"key": "other_license"}},
+                            "my_license", False)])
+    def test_has_license(self, key: dict, licence_key: str,
+                         result: bool) -> Any:
+        """ Test Hash license
+        """
+        test = GithubOrgClient('google')
+        test_license = test.has_license(key, license_key)
+        self.assertEqual(test_license, result)
