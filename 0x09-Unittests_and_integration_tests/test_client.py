@@ -61,3 +61,19 @@ class TestGithubOrgClient(unittest.TestCase):
         test = GithubOrgClient('google')
         test_license = test.has_license(key, license_key)
         self.assertEqual(test_license, result)
+
+
+
+@paramerized_class(("org_payload", "repos_payload", "expected_repos",
+                    "apache2_repos"))
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ Class
+    """
+    def setUpClass(self):
+        """ set up
+        """
+
+
+    def tearDownClass(self):
+        """ tear
+        """
