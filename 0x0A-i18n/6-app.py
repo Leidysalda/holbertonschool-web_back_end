@@ -27,7 +27,7 @@ class Config(object):
 
 app.config.from_object(Config)
 
-    
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home():
     """ Index
@@ -37,7 +37,7 @@ def home():
 
 @babel.localeselector
 def get_locale():
-    """ get locale 
+    """ get locale
     """
     localeParameters = request.args.get('locale')
     languages = app.config['LANGUAGES']
@@ -53,6 +53,7 @@ def get_locale():
     elif localeRequest in languages:
         return localeRequest
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 def get_user():
     """ Get User
@@ -72,6 +73,7 @@ def before_request():
     """
     user = get_user()
     g.user = user
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")

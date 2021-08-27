@@ -22,13 +22,12 @@ class Config(object):
 
 app.config.from_object(Config)
 
-    
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home():
     """ Index
     """
     return render_template('1-index.html')
-
 
 
 if __name__ == "__main__":
