@@ -4,7 +4,7 @@
 from flask import Flask, render_template, request, g
 from os import getenv
 from flask_babel import Babel
-import pyt.exceptions
+import pytz.exceptions
 from pytz import timezone
 from datetime import datetime
 
@@ -68,7 +68,23 @@ def get_user():
         return users.get(myId)
     return None
 
-@babel.time
+@babel.timezoneselector
+def get_timezone():
+    """ Time zone
+    """
+    timezoneParameter = request.args.get('timezone')
+    try:
+        timezoneUser = g.user.timezone
+    except AttributeError:
+        timezone = None
+    try:
+        if timezoneParameter:
+            return timezone(timezoneParameter)
+        elif timezoneUser:
+            return timezone(timezoneUser)
+        return pytz.utc
+    except pytz.exceptions.UnknownTimeZoneError:
+        return pytz.utc
 
 
 @app.before_request
