@@ -45,7 +45,7 @@ def replay(fn: Callable):
     merge_list = list(zip(inputs, outputs))
     for inp, out in merge_list:
         argument, data = inp.decode("utf-8"), out.decode("utf-8")
-        print(f"{value}({argument}*) -> {data}")
+        print(f"{value}(*{argument}) -> {data}")
 
 
 class Cache:
