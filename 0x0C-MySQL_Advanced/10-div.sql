@@ -3,15 +3,15 @@
 DELIMITER $$
 
 CREATE FUNCTION SafeDiv(a INT, b INT)
-       RETURN FLOAT
-       BEGIN
-	DECLARE result FLOAT;
+    RETURNS FLOAT
+    BEGIN
+        DECLARE result FLOAT;
 	IF b = 0 THEN
-	   SET result = 0;
+	    SET result = 0;
 	ELSE
-	   SET result = a / b;
+	    SET result = a / b;
 	END IF;
 	RETURN (result);
-       END$$
+    END$$
 
 DELIMITER;
