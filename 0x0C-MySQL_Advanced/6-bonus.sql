@@ -9,7 +9,7 @@ IF (SELECT COUNT(*) FROM projects WHERE name = project_name) = 0 THEN
 END IF;
 
 SET idProject = (SELECT id FROM projects WHERE name = project_name);
-INSERT INTO corrections (user_id, project_id) VALUES(user_id, idProject, score);
+INSERT INTO corrections (user_id, project_id, score) VALUES(user_id, idProject, score);
 
 END;
 |
