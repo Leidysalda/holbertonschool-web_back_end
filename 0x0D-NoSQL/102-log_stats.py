@@ -18,22 +18,24 @@ if __name__ == "__main__":
         method_count = collection.count_documents({'method': method})
         print(f"\tmethod {method}: {method_count}")
 
-    check_get = collection.count_documents(
-        {'method': 'GET', 'path': "/status"})
+    check_get = collection.count_documents({
+        'method': 'GET', 'path': "/status"
+    })
     print(f"{check_get} status check")
 
     print("IPs:")
     top_ips = collection.aggregate([
         {"$group":
-         {
-             "_id": "$ip",
-             "count": {"$sum": 1}
-         }
+            {
+                "_id": "$ip",
+                "count": {"$sum": 1}
+            }
         },
         {"$sort": {"count": -1}},
         {"$limit": 10},
-        {"$prohject": {
+        {"$project": {
             "_id": 0,
+            "ip": "$_id",
             "count": 1
         }}
     ])
