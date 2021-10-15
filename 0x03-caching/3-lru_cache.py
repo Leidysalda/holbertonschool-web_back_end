@@ -3,7 +3,7 @@
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LRUCache(BaseCaching):
     """class inherits from BaseCaching
     use self.cache_data - dictionary from the parent class
     BaseCaching
@@ -38,4 +38,8 @@ class FIFOCache(BaseCaching):
         """get"""
         if key is None or self.cache_data.get(key) is None:
             return None
+        if key in self.list_name:
+            if self.list_name[-1] != key:
+                self.list_name.remove(key)
+                self.list_name.append(key)
         return self.cache_data[key]

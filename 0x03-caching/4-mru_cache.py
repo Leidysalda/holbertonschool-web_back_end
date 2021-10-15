@@ -1,9 +1,9 @@
 #!/usr/bin/pyhton3
-"""FIFO caching"""
+"""MRU caching"""
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class MRUCache(BaseCaching):
     """class inherits from BaseCaching
     use self.cache_data - dictionary from the parent class
     BaseCaching
@@ -29,13 +29,17 @@ class FIFOCache(BaseCaching):
                 self.list_name.append(key)
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discard = self.list_name[0]
+            discard = self.list_name[-2]
             print(f"DISCARD:{discard}")
             del self.cache_data[discard]
-            self.list_name.pop(0)
+            self.list_name.pop(-2)
 
     def get(self, key):
         """get"""
         if key is None or self.cache_data.get(key) is None:
             return None
+        if key in self.list_name:
+            if self.list_name[-1] != key:
+                self.list_name.remove(key)
+                self.list_name.append(key)
         return self.cache_data[key]

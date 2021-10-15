@@ -3,7 +3,7 @@
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """class inherits from BaseCaching
     use self.cache_data - dictionary from the parent class
     BaseCaching
@@ -29,10 +29,10 @@ class FIFOCache(BaseCaching):
                 self.list_name.append(key)
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discard = self.list_name[0]
+            discard = self.list_name[-2]
             print(f"DISCARD:{discard}")
             del self.cache_data[discard]
-            self.list_name.pop(0)
+            self.list_name.pop(-2)
 
     def get(self, key):
         """get"""

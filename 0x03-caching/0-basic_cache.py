@@ -5,7 +5,10 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """class  inherits from BaseCaching"""
+    """class inherits from BaseCaching
+    use self.cache_data - dictionary from the parent class
+    BaseCaching
+    """
 
     def put(self, key, item):
         """put"""
