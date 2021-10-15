@@ -15,7 +15,7 @@ class FIFOCache(BaseCaching):
         self.list_name = []
 
     def put(self, key, item):
-        """put"""
+        """put method"""
         if key is None and item is None:
             return
 
@@ -35,7 +35,7 @@ class FIFOCache(BaseCaching):
             self.list_name.pop(0)
 
     def get(self, key):
-        """get"""
+        """get method"""
         if key is None or self.cache_data.get(key) is None:
             return None
         return self.cache_data[key]
