@@ -28,7 +28,7 @@ class FIFOCache(BaseCaching):
                 self.list_name.remove(key)
                 self.list_name.append(key)
 
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS - 1:
             discard = self.list_name[0]
             print("DISCARD:{}".format(discard))
             del self.cache_data[discard]
