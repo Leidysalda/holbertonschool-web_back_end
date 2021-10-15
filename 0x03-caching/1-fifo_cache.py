@@ -30,7 +30,7 @@ class FIFOCache(BaseCaching):
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             discard = self.list_name[0]
-            print(f"DISCARD:{discard}")
+            print("DISCARD:{}".format(discard))
             del self.cache_data[discard]
             self.list_name.pop(0)
 
