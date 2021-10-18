@@ -37,7 +37,7 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, mail: str, password: str) -> User:
+    def register_user(self, email: str, password: str) -> User:
         """
         Register method
         """
@@ -47,7 +47,7 @@ class Auth:
             hashed = _hash_password(password)
             new_user = self._db.add_user(email, hashed)
             return new_user
-        raise ValueError('User {} alredy exists'.format(user.email))
+        raise ValueError('User {} already exists'.format(user.email))
 
     def valid_login(self, email: str, password: str) -> bool:
         """
@@ -59,7 +59,7 @@ class Auth:
             return False
         return bcrypt.checkpw(password.encode('utf-8'), user.hashed_password)
 
-    def create_session(self, mail: str) -> str:
+    def create_session(self, email: str) -> str:
         """
         Create session method
         """
@@ -70,7 +70,7 @@ class Auth:
         user.session_id = _generate_uuid()
         return user.session_id
 
-    def get_user_from_session_id(self, session_id: str) -> str:
+    def get_user_from_session_id(self, session_id: str) -> None:
         """
         Get user method
         """
