@@ -3,8 +3,7 @@ const appendToEachArrayValue = (array, appendString) => {
   for (const element of array) {
     newArr.push(`${appendString}${element}`);
   }
-
-  return array;
+  return newAr;
 };
 
 export default appendToEachArrayValue;
