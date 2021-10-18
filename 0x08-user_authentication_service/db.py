@@ -16,7 +16,7 @@ class DB:
     def __init__(self):
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=True)
+        self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -41,14 +41,14 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """ Find user method
         """
-        if not kwarg:
+        if not kwargs:
             raise InvalidRequestError
 
         c_names = User.__table__.columns._data.keys()
 
         for key in kwargs.keys():
             if key in c_names:
-                ed_user = self._session.query(User).filter_by(**kargs).first()
+                ed_user = self._session.query(User).filter_by(**kwargs).first()
                 if ed_user is None:
                     raise NoResultFound
                 return ed_user
